@@ -23,7 +23,7 @@ def call(){
                                                 project ==~ /^(bff-)[-a-zA-Z0-9]+/ ? 1 : 
                                                     project ==~ /^(osb-)[-a-zA-Z0-9]+/ ? 1 : 0
                             if(errorProject == 0) {
-                                 env.ERROR = "Tecnología no valida - "
+                                 env.ERROR = "Tecnología no valida (${project}) - "
                                  assert errorProject == 1
                             }
                             //Validar branch
