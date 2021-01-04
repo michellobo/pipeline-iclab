@@ -15,12 +15,15 @@ def call(){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
                             GIT_NAME2 = sh (
-                                script: "basename GIT_URL",
+                                script: "basename" GIT_URL,
                                 returnStdout: true
                             ).trim()
                             println GIT_NAME2
                             println "----------------------------------------";
-                            echo (GIT_URL =~ /([^\/]*$)/).findAll()
+text = GIT_URL
+def ma = (text =~ /([^\/]*$)/) 
+println ma[0]           // 42
+                            
                             println env.BRANCH_NAME;
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
