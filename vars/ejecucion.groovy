@@ -15,17 +15,34 @@ def call(){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
                             println "----------------------------------------";
-                            println env.BRANCH_NAME;
+                            println env.CHANGE_AUTHOR;
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
                             String[] stageArray;
-                            println (env.BRANCH_NAME ==~ /^(feature-)[-a-zA-Z0-9]+/)
-                            type = env.BRANCH_NAME ==~ /^(feature-)[-a-zA-Z0-9]+/ ? "Feature" : "0"
+                            type = env.BRANCH_NAME ==~ /^(feature-)[-a-zA-Z0-9]+/ ? "feature" : "0"
+                            type = env.BRANCH_NAME ==~ /^(release-v)[1-9]+\-[1-9]+\-[1-9]+/ ? "release" : "0"
+                            type = env.BRANCH_NAME ==~ /(main|master)/ ? "master" : "0"
+                            type = env.BRANCH_NAME ==~ /^(develop)/ ? "develop" : "0"
                             println "----------------${type}------------------------";
-                            /*if (assert env.BRANCH_NAME ==~ patternFeature) {
-                                println "-----------------ENTRO-----------------------";
-                                println (assert env.BRANCH_NAME ==~ patternFeature)
-                            }*/
+                            switch(type) {
+                                case "feature":
+                                    
+                                break
+                                case "release":
+                                    
+                                break
+                                case "develop":
+                                    
+                                break
+                                case "master":
+                                    env.ERROR = "NO SE PERMITE ACCIONES EN MASTER "
+                                    println "------------------NO SE PERMITE ACCIONES EN MASTER----------------------";
+                                break
+                                default:
+                                    env.ERROR = "Branch no valido "
+                                    println "------------------Branch no valido----------------------";
+                                break
+                            }
                             stageArray = params.stage.split(';');
                             if (params.parametro == 'gradle') {
                                 result = stageArray - stagesGradle
@@ -48,7 +65,7 @@ def call(){
                                 }else{
                                     String listError =  "[\"${result.join('", "')}\"]"
                                     println listError
-                                    env.ERROR = "No coinciden los stage(s): ${listError}"
+                                    env.ERROR = env.ERROR + "No coinciden los stage(s): ${listError} "
                                     assert result.size() == 0
                                 }
                             }
