@@ -20,9 +20,7 @@ def call(){
                             ).trim()
                             println GIT_NAME2
                             println "----------------------------------------";
-                            echo GIT_URL
-                            def result = (GIT_URL =~ /([^\/]*$)/).findAll()*.first())
-                            echo result
+                            echo GIT_URL =~ /([^\/]*$)/)[0]
                             println env.BRANCH_NAME;
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
