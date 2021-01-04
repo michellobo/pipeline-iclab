@@ -15,7 +15,7 @@ def call(){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
                             GIT_NAME2 = sh (
-                                script: "basename `git rev-parse --show-toplevel`",
+                                script: "basename GIT_URL",
                                 returnStdout: true
                             ).trim()
                             println GIT_NAME2
@@ -23,7 +23,7 @@ def call(){
                             println scm.userRemoteConfigs;
 echo GIT_COMMIT
 echo GIT_BRANCH
-echo basename GIT_URL
+echo GIT_URL
 echo GITHUB_REVIEW_AUTHOR
 echo GIT_COMMITTER_EMAIL 
                             println env.BRANCH_NAME;
