@@ -22,7 +22,7 @@ def call(){
                             env.PASO = env.STAGE_NAME;
                             String[] stageArray;
                             String type;
-                            def patternFeature = '^feature-'
+                            def patternFeature = "^feature-"
                             println (env.BRANCH_NAME ==~ patternFeature)
                             /*if (assert env.BRANCH_NAME ==~ patternFeature) {
                                 println "-----------------ENTRO-----------------------";
