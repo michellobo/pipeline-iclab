@@ -14,11 +14,6 @@ def call(){
                         stage('ejecucion'){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
-                            GIT_NAME2 = sh (
-                                script: "basename" GIT_URL,
-                                returnStdout: true
-                            ).trim()
-                            println GIT_NAME2
                             println "----------------------------------------";
 text = GIT_URL
 def ma = (text =~ /([^\/]*$)/) 
