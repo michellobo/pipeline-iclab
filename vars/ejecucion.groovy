@@ -19,8 +19,9 @@ def call(){
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
                             String[] stageArray;
-                            String type;
                             println (env.BRANCH_NAME ==~ /^(feature-)[-a-zA-Z0-9]+/)
+                            type = env.BRANCH_NAME ==~ /^(feature-)[-a-zA-Z0-9]+/ ? "Feature" : "0"
+                            println "----------------${type}------------------------";
                             /*if (assert env.BRANCH_NAME ==~ patternFeature) {
                                 println "-----------------ENTRO-----------------------";
                                 println (assert env.BRANCH_NAME ==~ patternFeature)
