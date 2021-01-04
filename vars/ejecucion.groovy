@@ -21,6 +21,12 @@ def call(){
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
                             String[] stageArray;
+                            String type;
+                            def patternFeature = ^feature-
+                            if (assert env.BRANCH_NAME ==~ patternFeature) {
+                                println "-----------------ENTRO-----------------------";
+                                println (assert env.BRANCH_NAME ==~ patternFeature)
+                            }
                             stageArray = params.stage.split(';');
                             if (params.parametro == 'gradle') {
                                 result = stageArray - stagesGradle
