@@ -15,7 +15,7 @@ def call(){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
                             println "----------------------------------------";
-                            println currentBuild.projectName;
+                            println currentBuild.fullProjectName;
                             println env.BRANCH_NAME;
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
