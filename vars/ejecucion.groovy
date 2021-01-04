@@ -4,10 +4,8 @@ def call(){
     pipeline {
         agent any
         parameters {
+            choice(name: 'parametro', choices: ['maven', 'gradle'], description: 'maven o gradle')
             string(name: 'Stage(s)', defaultValue: '', description: 'stage(s)')
-            string(name: 'Branch', defaultValue: '', description: 'Branch (feature, develop o release)')
-            choice(name: 'parametro', choices: ['maven', 'gradle'], description: 'abc')
-            string(name: 'hola', defaultValue: '', description: 'hola')
         }
         stages {
             stage('Pipeline') {
