@@ -22,7 +22,10 @@ def call(){
                                             project ==~ /^(front-)[-a-zA-Z0-9]+/ ? 1 : 
                                                 project ==~ /^(bff-)[-a-zA-Z0-9]+/ ? 1 : 
                                                     project ==~ /^(osb-)[-a-zA-Z0-9]+/ ? 1 : 0
-                            env.ERROR = errorProject == 0 ? "Tecnología no valida - " : ""  
+                            if(errorProject == 0) {
+                                 env.ERROR = "Tecnología no valida - "
+                                 assert errorProject == 1
+                            }
                             //Validar branch
                             println env.BRANCH_NAME;
                             println "----------------------------------------";
@@ -50,6 +53,7 @@ def call(){
                                 default:
                                     env.ERROR = "Branch no valido - "
                                     println "------------------Branch no valido----------------------";
+                                    assert typeBranch != "feature"
                                 break
                             }
                             stageArray = params.stages.split(';');
