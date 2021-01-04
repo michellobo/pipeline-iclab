@@ -18,7 +18,7 @@ def call(){
                             text = GIT_URL
                             println text
                             def project = (text =~ /([^\/]*$)/)[0][0]   
-                            errorProject = project ==~ /^(ms-)[-a-zA-Z0-9]+/ ? 1 : 
+                            errorProject = project ==~ /^(ms5-)[-a-zA-Z0-9]+/ ? 1 : 
                                             project ==~ /^(front-)[-a-zA-Z0-9]+/ ? 1 : 
                                                 project ==~ /^(bff-)[-a-zA-Z0-9]+/ ? 1 : 
                                                     project ==~ /^(osb-)[-a-zA-Z0-9]+/ ? 1 : 0
