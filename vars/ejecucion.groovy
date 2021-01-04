@@ -20,10 +20,10 @@ def call(){
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
                             String[] stageArray;
-                            type = env.BRANCH_NAME ==~ /^(feature-)[-a-zA-Z0-9]+/ ? "feature" : "0"
-                            type = env.BRANCH_NAME ==~ /^(release-v)[1-9]+\-[1-9]+\-[1-9]+/ ? "release" : "0"
-                            type = env.BRANCH_NAME ==~ /(main|master)/ ? "master" : "0"
-                            type = env.BRANCH_NAME ==~ /^(develop)/ ? "develop" : "0"
+                            type = env.BRANCH_NAME ==~ /^(feature-)[-a-zA-Z0-9]+/ ? "feature" : 
+                                    env.BRANCH_NAME ==~ /^(release-v)[1-9]+\-[1-9]+\-[1-9]+/ ? "release" : 
+                                        env.BRANCH_NAME ==~ /(main|master)/ ? "master" : 
+                                            env.BRANCH_NAME ==~ /^(develop)/ ? "develop" : "0"
                             println "type: ----------------${type}------------------------";
                             switch(type) {
                                 case "feature":
