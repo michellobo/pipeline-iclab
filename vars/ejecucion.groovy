@@ -20,11 +20,10 @@ def call(){
                             ).trim()
                             project = GIT_NAME
                             println "----------------------------------------";
-                            println project;
+                            println scm.userRemoteConfigs;
 echo GIT_COMMIT
 echo GIT_BRANCH
-echo GIT_URL 
-echo GIT_URL_N 
+echo GIT_URL
 echo GIT_AUTHOR_NAME
 echo GIT_COMMITTER_EMAIL 
                             println env.BRANCH_NAME;
