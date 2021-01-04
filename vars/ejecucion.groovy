@@ -4,8 +4,9 @@ def call(){
     pipeline {
         agent any
         parameters {
+            string(name: 'Stage(s)', defaultValue: '', description: 'stage(s)')
+            string(name: 'Branch', defaultValue: '', description: 'Branch (feature, develop o release)')
             choice(name: 'parametro', choices: ['maven', 'gradle'], description: 'abc')
-            string(name: 'stage', defaultValue: '', description: 'stage')
             string(name: 'hola', defaultValue: '', description: 'hola')
         }
         stages {
@@ -15,6 +16,9 @@ def call(){
                         stage('ejecucion'){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
+                            println "----------------------------------------";
+                            println env.BRANCH_NAME;
+                            println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
                             String[] stageArray;
                             stageArray = params.stage.split(';');
