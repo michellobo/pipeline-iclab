@@ -1,0 +1,62 @@
+import groovy.util.logging.Log
+def call(){
+  
+    pipeline {
+        agent any
+        parameters {
+            choice(name: 'parametro', choices: ['maven', 'gradle'], description: 'abc')
+            string(name: 'stage', defaultValue: '', description: 'stage')
+        }
+        stages {
+            stage('Pipeline') {
+                steps {
+                    script {
+                        stage('ejecucion'){
+                            stagesMaven =  ['1','2','3','4','5']
+                            stagesGradle = ['1','2','3','4','5']
+                            env.PASO = env.STAGE_NAME;
+                            String[] stageArray;
+                            stageArray = params.stage.split(';');
+                            if (params.parametro == 'gradle') {
+                                result = stageArray - stagesGradle
+                                println result.size()
+                                println stageArray.size()
+                                if(result.size() == 0 || (stageArray.size() == 1 && stageArray[0] == "")){
+                                    gradle.call(stagesGradle, stageArray)
+                                }else{
+                                    String listError =  "[\"${result.join('", "')}\"]"
+                                    println listError
+                                    env.ERROR = "No coinciden los stage(s): ${listError}"
+                                    assert result.size() == 0
+                                }
+                            }else{
+                                result = stageArray - stagesMaven
+                                println result.size()
+                                println stageArray.size()
+                                if(result.size() == 0 || (stageArray.size() == 1 && stageArray[0] == "")){
+                                    maven.call(stagesMaven, stageArray)
+                                }else{
+                                    String listError =  "[\"${result.join('", "')}\"]"
+                                    println listError
+                                    env.ERROR = "No coinciden los stage(s): ${listError}"
+                                    assert result.size() == 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        post {
+            success {
+                slackSend channel: 'U01DC6FDX70', color: 'good', message: "Build Success: [Michell Lobo][${env.JOB_NAME}][${params.parametro}] Ejecución exitosa.", teamDomain: 'dipdevopsusach2020', tokenCredentialId: 'slack-michellobo'
+            }
+            failure {
+                slackSend channel: 'U01DC6FDX70', color: 'danger', message: "Build Failure: [Michell Lobo][${env.JOB_NAME}][${params.parametro}] Ejecución fallida en stage [${env.PASO}] _ [${env.ERROR}]", teamDomain: 'dipdevopsusach2020', tokenCredentialId: 'slack-michellobo'
+            }
+        }
+    }
+
+}
+
+return this;
