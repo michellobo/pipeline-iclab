@@ -21,7 +21,7 @@ def call(){
                             println GIT_NAME2
                             println "----------------------------------------";
                             echo GIT_URL
-                            def result = (GIT_URL =~ /([^\/]*$)/).findAll()*.first()
+                            def result = (GIT_URL =~ /([^\/]*$)/).findAll()*.first())
                             echo result
                             println env.BRANCH_NAME;
                             println "----------------------------------------";
