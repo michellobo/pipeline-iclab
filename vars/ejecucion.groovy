@@ -14,7 +14,11 @@ def call(){
                         stage('ejecucion'){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
-                            project = sh 'basename `git rev-parse --show-toplevel`'
+                            GIT_NAME = sh (
+                                script: 'basename `git rev-parse --show-toplevel`',
+                                returnStdout: true
+                            ).trim()
+                            project = GIT_NAME
                             println "----------------------------------------";
                             println project;
                             println env.BRANCH_NAME;
