@@ -15,7 +15,7 @@ def call(){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
                             GIT_NAME2 = sh (
-                                script: "basename $(git rev-parse --show-toplevel)",
+                                script: "basename `git rev-parse --show-toplevel`",
                                 returnStdout: true
                             ).trim()
                             println GIT_NAME2
