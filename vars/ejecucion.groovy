@@ -20,12 +20,9 @@ def call(){
                             ).trim()
                             println GIT_NAME2
                             println "----------------------------------------";
-                            println scm.userRemoteConfigs;
-echo GIT_COMMIT
-echo GIT_BRANCH
-echo GIT_URL
-echo GITHUB_REVIEW_AUTHOR
-echo GIT_COMMITTER_EMAIL 
+                            echo GIT_URL
+                            def result = (GIT_URL =~ /([^/]*$)/).findAll()*.first()
+                            echo result
                             println env.BRANCH_NAME;
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
