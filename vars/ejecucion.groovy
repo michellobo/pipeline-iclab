@@ -5,7 +5,7 @@ def call(){
         agent any
         parameters {
             choice(name: 'parametro', choices: ['maven', 'gradle'], description: 'maven o gradle')
-            string(name: 'Stages', defaultValue: '', description: 'stage(s)')
+            string(name: 'stages', defaultValue: '', description: 'stage(s)')
         }
         stages {
             stage('Pipeline') {
@@ -15,7 +15,7 @@ def call(){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
                             println "----------------------------------------";
-                            println env.projectName;
+                            println currentBuild.projectName;
                             println env.BRANCH_NAME;
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
