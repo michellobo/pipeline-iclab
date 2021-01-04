@@ -15,22 +15,25 @@ def call(){
                             stagesMaven =  ['1','2','3','4','5']
                             stagesGradle = ['1','2','3','4','5']
                             println "----------------------------------------";
-text = GIT_URL
-println = text
-def ma = (text =~ /([^\/]*$)/) 
-println ma[0]   
-println ma[0][0]      
-                            
+                            text = GIT_URL
+                            println text
+                            def project = (text =~ /([^\/]*$)/)[0][0]   
+                            errorProject = project ==~ /^(ms-)[-a-zA-Z0-9]+/ ? 1 : 
+                                            project ==~ /^(front-)[-a-zA-Z0-9]+/ ? 1 : 
+                                                project ==~ /^(bff-)[-a-zA-Z0-9]+/ ? 1 : 
+                                                    project ==~ /^(osb-)[-a-zA-Z0-9]+/ ? 1 : 0
+                            env.ERROR = errorProject == 0 ? "Tecnología no valida - " : ""  
+                            //Validar branch
                             println env.BRANCH_NAME;
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
                             String[] stageArray;
-                            type = env.BRANCH_NAME ==~ /^(feature-)[-a-zA-Z0-9]+/ ? "feature" : 
+                            typeBranch = env.BRANCH_NAME ==~ /^(feature-)[-a-zA-Z0-9]+/ ? "feature" : 
                                     env.BRANCH_NAME ==~ /^(release-v)[1-9]+\-[1-9]+\-[1-9]+/ ? "release" : 
                                         env.BRANCH_NAME ==~ /(main|master)/ ? "master" : 
                                             env.BRANCH_NAME ==~ /^(develop)/ ? "develop" : "0"
-                            println "type: ----------------${type}------------------------";
-                            switch(type) {
+                            println "typeBranch: ----------------${typeBranch}------------------------";
+                            switch(typeBranch) {
                                 case "feature":
                                     
                                 break
@@ -41,11 +44,11 @@ println ma[0][0]
                                     
                                 break
                                 case "master":
-                                    env.ERROR = "NO SE PERMITE ACCIONES EN MASTER "
+                                    env.ERROR = "NO SE PERMITE ACCIONES EN MASTER - "
                                     println "------------------NO SE PERMITE ACCIONES EN MASTER----------------------";
                                 break
                                 default:
-                                    env.ERROR = "Branch no valido "
+                                    env.ERROR = "Branch no valido - "
                                     println "------------------Branch no valido----------------------";
                                 break
                             }
