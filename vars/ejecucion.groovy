@@ -16,6 +16,7 @@ def call(){
                             stagesGradle = ['1','2','3','4','5']
                             println "----------------------------------------";
                             println env.CHANGE_AUTHOR;
+                            println env.BRANCH_NAME;
                             println "----------------------------------------";
                             env.PASO = env.STAGE_NAME;
                             String[] stageArray;
@@ -23,7 +24,7 @@ def call(){
                             type = env.BRANCH_NAME ==~ /^(release-v)[1-9]+\-[1-9]+\-[1-9]+/ ? "release" : "0"
                             type = env.BRANCH_NAME ==~ /(main|master)/ ? "master" : "0"
                             type = env.BRANCH_NAME ==~ /^(develop)/ ? "develop" : "0"
-                            println "----------------${type}------------------------";
+                            println "type: ----------------${type}------------------------";
                             switch(type) {
                                 case "feature":
                                     
