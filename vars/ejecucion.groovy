@@ -16,8 +16,10 @@ def call(){
                             stagesGradle = ['1','2','3','4','5']
                             println "----------------------------------------";
 text = GIT_URL
+println = text
 def ma = (text =~ /([^\/]*$)/) 
-println ma[0]           // 42
+println ma[0]   
+println ma[0][0]      
                             
                             println env.BRANCH_NAME;
                             println "----------------------------------------";
