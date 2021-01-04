@@ -6,6 +6,7 @@ def call(){
         parameters {
             choice(name: 'parametro', choices: ['maven', 'gradle'], description: 'abc')
             string(name: 'stage', defaultValue: '', description: 'stage')
+            string(name: 'hola', defaultValue: '', description: 'hola')
         }
         stages {
             stage('Pipeline') {
